@@ -1,50 +1,12 @@
-const startNumber=9
-const flipCard = document.querySelector(".flip-card")
-
-
-flip(flipCard)
-
-function flip(flipCard) {
-  const topele = flipCard.querySelector(".top");
-  const bottomele = flipCard.querySelector(".bottom");
-  const topFlip = document.createElement('div')
-  const botoomFlip = document.createElement('div')
-  topFlip.classList.add('top-flip')
-  botoomFlip.classList.add('bottom-flip')
-  const startNumber = parseInt(topele.textContent)
-  topFlip.textContent=startNumber
-  botoomFlip.textContent=startNumber-1
-
-  topele.textContent=startNumber
-  bottomele.textContent=startNumber
-
-
-  topFlip.addEventListener("animationstart" , e => {
-    topele.textContent=startNumber-1
-  })
-  topFlip.addEventListener("animationend" , e => {
-    topFlip.remove()
-  })
-
-  botoomFlip.addEventListener("animationend" , e => {
-    bottomele.textContent=startNumber-1
-    botoomFlip.remove()
-    // flip(flipCard)
-  })
-
-  flipCard.append(topFlip,botoomFlip)
-}
+const countToDate = new Date().setHours(new Date().getHours() + 24)
 let previousTimeBetweenDates
-const countToDate = new Date("2022-08-02")
-setInterval(()=>{
+setInterval(() => {
   const currentDate = new Date()
-  const timeBetweenDates= Math.ceil((countToDate -currentDate)/1000)
-  if(previousTimeBetweenDates!== timeBetweenDates) {
-    console.log('1 sec passed')
-  }
+  const timeBetweenDates = Math.ceil((countToDate - currentDate) / 1000)
   flipAllCards(timeBetweenDates)
-  previousTimeBetweenDates=timeBetweenDates
-},250)
+
+  previousTimeBetweenDates = timeBetweenDates
+}, 250)
 
 function flipAllCards(time) {
   const seconds = time % 60

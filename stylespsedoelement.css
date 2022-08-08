@@ -1,4 +1,4 @@
-*, * ::after, * ::after {
+*, *::after, *::before {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 2.25rem;
@@ -17,21 +17,24 @@ body {
   border-radius: .1em;
 }
 
-.top,.bottom , .flip-card .top-flip,.flip-card .bottom-flip {
+.top,.bottom , .flip-card.flip::after,.flip-card.flip::before {
   height: .75em;
   line-height: 1;
   padding: .25em;
   overflow: hidden;
 }
 
-.top, .flip-card .top-flip {
+.top, .flip-card.flip::before {
 background-color: #f7f7f7;
 border-top-left-radius: .1em;
 border-top-right-radius: .1em;
 border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
+.top {
 
-.bottom,.flip-card .bottom-flip {
+}
+
+.bottom,.flip-card.flip::after {
   background-color: white;
   display: flex;
   align-items: flex-end;
@@ -39,16 +42,20 @@ border-bottom: 1px solid rgba(0, 0, 0, .1);
 border-bottom-right-radius: .1em;
 }
 
-.flip-card .top-flip {
+.flip-card.flip::before {
   position: absolute;
+  content: attr(data-currentnumber);
+
+  overflow: hidden;
+  /* background-color: black; */
   width: 100%;
   animation: flip-top 250ms ease-in;
   transform-origin: bottom;
 }
 
-.flip-card .bottom-flip {
+.flip-card.flip::after {
   position: absolute;
- 
+  content: attr(data-nextnumber);
   bottom: 0;
   /* overflow: hidden; */
   /* background-color: black; */
@@ -64,33 +71,7 @@ border-bottom-right-radius: .1em;
   }
 }
 @keyframes flip-bottom {
-  100% {
+  0% {
     transform: rotateX(0deg);
   }
-}
-
-.container {
-  display: flex;
-  gap: .5em;
-  justify-content: center;
-}
-
-.continer-segment {
-  display: flex;
-  flex-direction: column;
-  gap: .1em;
-  align-items: center;
-}
-
-
-
-.segment {
-  display: flex;
-  gap: .1em;
-}
-
-
-.segment-title {
-  font-size: 1rem;
-  text-align: center;
 }
